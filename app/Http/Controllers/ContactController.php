@@ -34,7 +34,7 @@ class ContactController extends Controller
             // ヘッダー行を追加
             fputcsv($stream, $contact->csvHeader());
 
-            $results = $contact->getCsvData($post['start_data'], $post['end_data']);
+            $results = $contact->getCsvData($post['start_date'], $post['end_date']);
 
             if (empty($results[0])) {
                 fputcsv($stream, [
@@ -48,7 +48,7 @@ class ContactController extends Controller
             fclose($stream);
         });
         $response->headers->set('Content-Type', 'application/octet-stream');
-        $response->headers->set('content_disposition', 'attachment; filename=' . $post['start_data'] . '~' . $post['end_data'] . 'お問い合わせ一覧.csv');
+        $response->headers->set('content_disposition', 'attachment; filename=' . $post['start_date'] . '~' . $post['end_date'] . 'お問い合わせ一覧.csv');
 
         return $response;
     }
